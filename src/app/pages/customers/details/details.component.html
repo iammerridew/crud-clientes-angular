@@ -1,0 +1,51 @@
+<div class="card" id="card-details">
+  <div class="card-header">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+      Detalles de cliente
+      <div class="btn-group btn-group-sm">
+        <a [routerLink]="['/list']" class="btn btn-primary" type="button"><i class="fas fa-arrow-left"></i></a>
+        <a [routerLink]="['/edit', customer?.id ]" class="btn btn-primary" type="button"><i class="fas fa-pen"></i></a>
+        <button class="btn btn-primary" type="button" (click)="destroy(customer?.id)"><i class="fas fa-trash"></i></button>
+        <button class="btn btn-primary" type="button" (click)="exportPDF()"><i class="fas fa-file-pdf"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <b>Nombre:</b> {{ customer?.name }} {{ customer?.father_lastname }} {{ customer?.mother_lastname }}
+          </li>
+          <li class="list-group-item">
+            <b>Correo electrónico:</b> {{ customer?.email }}
+          </li>
+          <li class="list-group-item">
+            <b>Teléfono:</b> {{ customer?.telephone }}
+          </li>
+          <li class="list-group-item">
+            <b>Nombre fiscal:</b> {{ customer?.fiscal_name }}
+          </li>
+          <li class="list-group-item">
+            <b>RFC:</b> {{ customer?.rfc }}
+          </li>
+          <li class="list-group-item">
+            <b>Contacto:</b> {{ customer?.contact }}
+          </li>
+          <li class="list-group-item">
+            <b>Longitud:</b> {{ customer?.longitude }}
+          </li>
+          <li class="list-group-item">
+            <b>Latidud:</b> {{ customer?.latitude }}
+          </li>
+          <li class="list-group-item">
+            <b>Creado el:</b> {{ customer?.created_at | date:'short' }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6" *ngIf="customer?.latitude">
+        <app-here-map [lat]="customer?.latitude" [lng]="customer?.longitude" width="100%" height="368px"></app-here-map>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">CRUD</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/list']" [routerLinkActive]="['active']"><i class="fas fa-list mx-2"></i> Lista</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/new']" [routerLinkActive]="['active']"><i class="fas fa-plus mx-2"></i> Nuevo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

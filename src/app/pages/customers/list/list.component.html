@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+      Listado de clientes
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-success" type="button" (click)="exportExcel()"><i class="fas fa-file-excel"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-striped table-hover" id="customer-table">
+      <thead class="text-uppercase">
+        <tr>
+          <th>Nombre</th>
+          <th>Nombre Fiscal</th>
+          <th>RFC</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of customers">
+          <td data-label="Nombre">
+            <h6 class="m-0 fw-normal">{{ item.name }} {{ item.father_lastname }} {{ item.mother_lastname }} </h6>
+            <p class="mb-0 text-muted"><small>{{ item.email }}</small></p>
+          </td>
+          <td data-label="Nombre fiscal">{{ item.fiscal_name }}</td>
+          <td data-label="RFC">{{ item.rfc }}</td>
+          <td data-label="Teléfono">{{ item.telephone }}</td>
+          <td data-label="Acciones">
+            <div class="btn-group btn-group-sm d-none d-sm-block" role="group">
+              <a [routerLink]="['/details', item.id]" class="btn btn-info"><i class="fas fa-info-circle"></i></a>
+              <a [routerLink]="['/edit', item.id]" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+              <button class="btn btn-danger" (click)="destroy(item.id)"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

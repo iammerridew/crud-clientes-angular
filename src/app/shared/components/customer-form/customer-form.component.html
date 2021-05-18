@@ -1,0 +1,122 @@
+<div class="col-md-12 mx-auto">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+        {{ title }}
+        <div class="btn-group btn-group-sm">
+          <a [routerLink]="['/list']" class="btn btn-primary" type="button"><i class="fas fa-arrow-left"></i></a>
+          <button class="btn btn-primary" type="button" *ngIf="activeID" (click)="destroy(activeID)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form class="row g-3" (ngSubmit)="storage()" [formGroup]="customerForm">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="mt-3 col-md-12">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['name'].invalid && (customerForm.controls['name'].dirty || customerForm.controls['name'].touched)">
+                  El nombre es requerido.
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="father_lastname" class="form-label">Primer apellido</label>
+                <input type="text" class="form-control" id="father_lastname" formControlName="father_lastname">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['father_lastname'].invalid && (customerForm.controls['father_lastname'].dirty || customerForm.controls['father_lastname'].touched)">
+                  El primer apellido es requerido.
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="mother_lastname" class="form-label">Segundo apellido</label>
+                <input type="text" class="form-control" id="mother_lastname" formControlName="mother_lastname">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['mother_lastname'].invalid && (customerForm.controls['mother_lastname'].dirty || customerForm.controls['mother_lastname'].touched)">
+                  El segundo apellido es requerido.
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="text" class="form-control" id="email" formControlName="email">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['email'].invalid && (customerForm.controls['email'].dirty || customerForm.controls['email'].touched)">
+                  <span class="d-block" *ngIf="customerForm.controls['email'].errors.required">El correo
+                    electrónico es requerido.</span>
+                  <span class="d-block" *ngIf="customerForm.controls['email'].errors.email">El correo
+                    electrónico es inválido.</span>
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="telephone" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="telephone" formControlName="telephone">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['telephone'].invalid && (customerForm.controls['telephone'].dirty || customerForm.controls['telephone'].touched)">
+                  La longitud máxima es 14.
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="fiscal_name" class="form-label">Nombre fiscal</label>
+                <input type="text" class="form-control" id="fiscal_name" formControlName="fiscal_name">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['fiscal_name'].invalid && (customerForm.controls['fiscal_name'].dirty || customerForm.controls['fiscal_name'].touched)">
+                  El nombre fiscal es requerido.
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="rfc" class="form-label">RFC</label>
+                <input type="text" class="form-control" id="rfc" formControlName="rfc">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['rfc'].invalid && (customerForm.controls['rfc'].dirty || customerForm.controls['rfc'].touched)">
+                  La longitud máxima es 13.
+                </small>
+              </div>
+              <div class="col-md-12">
+                <label for="contact" class="form-label">Contacto</label>
+                <input type="text" class="form-control" id="contact" formControlName="contact">
+              </div>
+              <div class="col-md-6">
+                <label for="longitude" class="form-label">Longitud</label>
+                <input type="text" class="form-control" id="longitude" formControlName="longitude">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['longitude'].invalid && (customerForm.controls['longitude'].dirty || customerForm.controls['longitude'].touched)">
+                  <span class="d-block" *ngIf="customerForm.controls['longitude'].errors.required">La longitud es
+                    requerida.</span>
+                  <span class="d-block" *ngIf="customerForm.controls['longitude'].errors.min">El valor mínimo es de
+                    -180.</span>
+                  <span class="d-block" *ngIf="customerForm.controls['longitude'].errors.max">El valor máximo es de
+                    180.</span>
+                </small>
+              </div>
+              <div class="col-md-6">
+                <label for="latitude" class="form-label">Latitud</label>
+                <input type="text" class="form-control" id="latitude" formControlName="latitude">
+                <small class="text-danger"
+                  *ngIf="customerForm.controls['latitude'].invalid && (customerForm.controls['latitude'].dirty || customerForm.controls['latitude'].touched)">
+                  <span class="d-block" *ngIf="customerForm.controls['latitude'].errors.required">La latitud es
+                    requerida.</span>
+                  <span class="d-block" *ngIf="customerForm.controls['latitude'].errors.min">El valor mínimo es de
+                    -90.</span>
+                  <span class="d-block" *ngIf="customerForm.controls['latitude'].errors.max">El valor máximo es de
+                    90.</span>
+                </small>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6 mt-3" *ngIf="lat">
+            <app-here-map [lat]="lat" [lng]="lng" width="100%" height="368px" (updateCords)="setNewCords($event)">
+            </app-here-map>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
